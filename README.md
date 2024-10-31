@@ -1,2 +1,2 @@
 # ShareHubMIU
-ShareHub MIU is a dedicated platform for students and staff at Maharishi International University to easily share, exchange, and rent items within the MIU community.
+ShareHub MIU is a dedicated platform for students and staff at Maharishi International University to easily share, exchange, and rent items within the MIU community. From rooms and cars to furniture and electronics, ShareHub MIU fosters a sustainable and convenient way to connect and support one another. Users can list items for free or for a fee, making it simple to find what they need or pass along what they no longer use.
