@@ -32,3 +32,10 @@ Throughout each transaction and interaction, the system sends automated email no
 
 - **Azure Cloud**: The application will be hosted on Azure, providing resources for deployment, security, and data storage.
 - **Clean Architecture**: Architectural pattern for organizing code.
+
+## Class Diagram
+![alt text](https://github.com/HieuMIU/ShareHubMIU/blob/main/Documents/Project-Class-Diagram.jpg)
+
+## ER Diagram
+![alt text](https://github.com/HieuMIU/ShareHubMIU/blob/main/Documents/Project-ER-Diagram.jpg)
+
