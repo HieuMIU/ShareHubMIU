@@ -1,4 +1,4 @@
-namespace WhiteLagoon.Web.Models
+namespace ShareHubMIU.Web.Models
 {
     public class ErrorViewModel
     {

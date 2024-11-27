@@ -1,4 +1,4 @@
-﻿namespace WhiteLagoon.Application.Common.DTOs
+﻿namespace ShareHubMIU.Application.Common.DTOs
 {
     public class PieChartDto
     {

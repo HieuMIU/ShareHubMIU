@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Syncfusion.Presentation;
 
-namespace WhiteLagoon.Web.Controllers
+namespace ShareHubMIU.Web.Controllers
 {
     public class HomeController : Controller
     {
