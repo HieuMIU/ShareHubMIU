@@ -11,20 +11,20 @@ using ShareHubMIU.Infrastructure.Data;
 
 namespace ShareHubMIU.Infrastructure.Repository
 {
-    public class ItemRepository : Repository<Item>, ItemRepository
+    public class CommonItemRepository : Repository<CommonItem>, ICommonItemRepository
     {
 
         private readonly ApplicationDbContext _db;
 
-        public ItemRepository(ApplicationDbContext db) 
+        public CommonItemRepository(ApplicationDbContext db) 
             : base(db) 
         {
             _db = db;
         }
 
-        public void Update(Item entity)
+        public void Update(CommonItem entity)
         {
-            _db.Amenities.Update(entity);
+            _db.CommonItems.Update(entity);
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace WhiteLagoon.Web.ViewModel
+namespace ShareHubMIU.Web.ViewModel
 {
     public class LoginVM
     {

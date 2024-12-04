@@ -9,7 +9,11 @@ namespace ShareHubMIU.Application.Common.Interfaces
 {
     public interface IUnitOfWork
     {
-        IItemRepository Item { get; }
+        ICarSharingRepository CarSharing { get; }
+
+        IRoomSharingRepository RoomSharing { get; }
+
+        ICommonItemRepository CommonItem { get; }
 
         IApplicationUserRepository User { get; }    
 

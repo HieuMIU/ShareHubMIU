@@ -10,12 +10,12 @@ using ShareHubMIU.Domain.Entities;
 
 namespace ShareHubMIU.Application.Services.Interfaces
 {
-    public interface IItemService
+    public interface ICarSharingService
     {
-        IEnumerable<Item> GetAllItems();
-        Item GetItemById(int id);
-        void CreateItem(Item item);
-        void UpdateItem(Item item);
-        bool DeleteItem(int id);
+        IEnumerable<CarSharing> GetAllCarSharings();
+        CarSharing GetItemById(int id);
+        void CreateCarSharing(CarSharing carSharing);
+        void UpdateCarSharing(CarSharing carSharing);
+        bool DeleteCarSharing(int id);
     }
 }
