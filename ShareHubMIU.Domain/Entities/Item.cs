@@ -22,17 +22,18 @@ namespace ShareHubMIU.Domain.Entities
         public DateTime DateListed { get; set; }
         public bool IsAvailable { get; set; }
 
-        [Required]
-        public int? AddressId { get; set; }
+        public string AddressLine1 { get; set; }
 
-        [ForeignKey("AddressId")]
-        public Address Location { get; set; }
+        public string AddressLine2 { get; set; }
+        public string City { get; set; }
+        public string State { get; set; }
+        public string ZipCode { get; set; }
 
         [Required]
-        public string SellerId { get; set; }
+        public required string SellerId { get; set; }
 
         [ForeignKey("SellerId")]
-        public ApplicationUser Seller { get; set; }
+        public required ApplicationUser Seller { get; set; }
 
         [NotMapped]
         public IFormFile? Image { get; set; }

@@ -17,7 +17,7 @@ namespace ShareHubMIU.Domain.Entities
         public string Transmission { get; set; }
         public int NumberOfSeats { get; set; }
         public string Condition { get; set; }
-        public decimal PricePerDay { get; set; }
+        public double PricePerDay { get; set; }
         public bool IsAvailable { get; set; }
         public DateTime? AvailableFrom { get; set; }
         public DateTime? AvailableUntil { get; set; }

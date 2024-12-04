@@ -35,16 +35,17 @@ namespace ShareHubMIU.Infrastructure.Data
 
         public DbSet<UserReport> UserReports { get; set; }
 
+        //public DbSet<Address> Addresses { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<ItemView>(
-                eb =>
-                {
-                    eb.HasKey(eb => eb.Id);
-                    eb.ToView("View_Items");
-                });
+            modelBuilder.Entity<Item>()
+                .HasOne(i => i.Seller)
+                .WithMany() // If Seller can have multiple items
+                .HasForeignKey(i => i.SellerId)
+                .OnDelete(DeleteBehavior.NoAction); // Prevent cascading delete
         }
     }
 }

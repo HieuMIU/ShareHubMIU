@@ -155,39 +155,6 @@ namespace ShareHubMIU.Infrastructure.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("ShareHubMIU.Domain.Entities.Address", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("AddressLine1")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("AddressLine2")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("City")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("State")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ZipCode")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Address");
-                });
-
             modelBuilder.Entity("ShareHubMIU.Domain.Entities.ApplicationUser", b =>
                 {
                     b.Property<string>("Id")
@@ -196,8 +163,14 @@ namespace ShareHubMIU.Infrastructure.Migrations
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
-                    b.Property<int>("AddressId")
-                        .HasColumnType("int");
+                    b.Property<string>("AddressLine1")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("AddressLine2")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("City")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
@@ -243,6 +216,9 @@ namespace ShareHubMIU.Infrastructure.Migrations
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("State")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("bit");
 
@@ -250,9 +226,10 @@ namespace ShareHubMIU.Infrastructure.Migrations
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
 
-                    b.HasKey("Id");
+                    b.Property<string>("ZipCode")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.HasIndex("AddressId");
+                    b.HasKey("Id");
 
                     b.HasIndex("NormalizedEmail")
                         .HasDatabaseName("EmailIndex");
@@ -265,7 +242,7 @@ namespace ShareHubMIU.Infrastructure.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
-            modelBuilder.Entity("ShareHubMIU.Domain.Entities.CarSharing", b =>
+            modelBuilder.Entity("ShareHubMIU.Domain.Entities.Item", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -273,20 +250,15 @@ namespace ShareHubMIU.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("AddressId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("AvailableFrom")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("AvailableUntil")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Color")
+                    b.Property<string>("AddressLine1")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Condition")
+                    b.Property<string>("AddressLine2")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("City")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -297,9 +269,10 @@ namespace ShareHubMIU.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("FuelType")
+                    b.Property<string>("Discriminator")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(13)
+                        .HasColumnType("nvarchar(13)");
 
                     b.Property<string>("ImageUrl")
                         .HasColumnType("nvarchar(max)");
@@ -307,91 +280,11 @@ namespace ShareHubMIU.Infrastructure.Migrations
                     b.Property<bool>("IsAvailable")
                         .HasColumnType("bit");
 
-                    b.Property<string>("Make")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Mileage")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Model")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("NumberOfSeats")
-                        .HasColumnType("int");
-
-                    b.Property<decimal>("PricePerDay")
-                        .HasColumnType("decimal(18,2)");
-
                     b.Property<string>("SellerId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Transmission")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Type")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Year")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AddressId");
-
-                    b.HasIndex("SellerId");
-
-                    b.ToTable("CarSharings");
-                });
-
-            modelBuilder.Entity("ShareHubMIU.Domain.Entities.CommonItem", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("AddressId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Condition")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("DateListed")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ImageUrl")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsAvailable")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<string>("SellerId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("SubCategory")
+                    b.Property<string>("State")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -403,13 +296,19 @@ namespace ShareHubMIU.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.Property<string>("ZipCode")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
-                    b.HasIndex("AddressId");
+                    b.HasKey("Id");
 
                     b.HasIndex("SellerId");
 
-                    b.ToTable("CommonItems");
+                    b.ToTable("Item");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("Item");
+
+                    b.UseTphMappingStrategy();
                 });
 
             modelBuilder.Entity("ShareHubMIU.Domain.Entities.ItemReview", b =>
@@ -506,70 +405,6 @@ namespace ShareHubMIU.Infrastructure.Migrations
                     b.ToTable("Requests");
                 });
 
-            modelBuilder.Entity("ShareHubMIU.Domain.Entities.RoomSharing", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("AddressId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("AvailableFrom")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("AvailableUntil")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("Capacity")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("DateListed")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ImageUrl")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsAvailable")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsFurnished")
-                        .HasColumnType("bit");
-
-                    b.Property<decimal>("RentPerMonth")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<string>("RoomType")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("SellerId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Type")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AddressId");
-
-                    b.HasIndex("SellerId");
-
-                    b.ToTable("RoomSharings");
-                });
-
             modelBuilder.Entity("ShareHubMIU.Domain.Entities.UserReport", b =>
                 {
                     b.Property<int>("Id")
@@ -627,37 +462,116 @@ namespace ShareHubMIU.Infrastructure.Migrations
                     b.ToTable("UserReviews");
                 });
 
-            modelBuilder.Entity("ShareHubMIU.Domain.View.ItemView", b =>
+            modelBuilder.Entity("ShareHubMIU.Domain.Entities.CarSharing", b =>
                 {
-                    b.Property<int>("Id")
-                        .HasColumnType("int");
+                    b.HasBaseType("ShareHubMIU.Domain.Entities.Item");
 
-                    b.Property<DateTime>("DateListed")
+                    b.Property<DateTime?>("AvailableFrom")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Description")
+                    b.Property<DateTime?>("AvailableUntil")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Color")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ImageUrl")
+                    b.Property<string>("Condition")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("IsAvailable")
+                    b.Property<string>("FuelType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Make")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Mileage")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Model")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("NumberOfSeats")
+                        .HasColumnType("int");
+
+                    b.Property<double>("PricePerDay")
+                        .HasColumnType("float");
+
+                    b.Property<string>("Transmission")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Year")
+                        .HasColumnType("int");
+
+                    b.ToTable("Item", t =>
+                        {
+                            t.Property("Condition")
+                                .HasColumnName("CarSharing_Condition");
+                        });
+
+                    b.HasDiscriminator().HasValue("CarSharing");
+                });
+
+            modelBuilder.Entity("ShareHubMIU.Domain.Entities.CommonItem", b =>
+                {
+                    b.HasBaseType("ShareHubMIU.Domain.Entities.Item");
+
+                    b.Property<string>("Condition")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("Price")
+                        .HasColumnType("float");
+
+                    b.Property<string>("SubCategory")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasDiscriminator().HasValue("CommonItem");
+                });
+
+            modelBuilder.Entity("ShareHubMIU.Domain.Entities.RoomSharing", b =>
+                {
+                    b.HasBaseType("ShareHubMIU.Domain.Entities.Item");
+
+                    b.Property<DateTime?>("AvailableFrom")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("AvailableUntil")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Capacity")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsFurnished")
                         .HasColumnType("bit");
 
-                    b.Property<string>("Title")
+                    b.Property<double>("RentPerMonth")
+                        .HasColumnType("float");
+
+                    b.Property<string>("RoomType")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Type")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.ToTable("Item", t =>
+                        {
+                            t.Property("AvailableFrom")
+                                .HasColumnName("RoomSharing_AvailableFrom");
 
-                    b.HasKey("Id");
+                            t.Property("AvailableUntil")
+                                .HasColumnName("RoomSharing_AvailableUntil");
+                        });
 
-                    b.ToTable((string)null);
-
-                    b.ToView("View_Items", (string)null);
+                    b.HasDiscriminator().HasValue("RoomSharing");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -711,51 +625,13 @@ namespace ShareHubMIU.Infrastructure.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("ShareHubMIU.Domain.Entities.ApplicationUser", b =>
+            modelBuilder.Entity("ShareHubMIU.Domain.Entities.Item", b =>
                 {
-                    b.HasOne("ShareHubMIU.Domain.Entities.Address", "Address")
-                        .WithMany()
-                        .HasForeignKey("AddressId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Address");
-                });
-
-            modelBuilder.Entity("ShareHubMIU.Domain.Entities.CarSharing", b =>
-                {
-                    b.HasOne("ShareHubMIU.Domain.Entities.Address", "Location")
-                        .WithMany()
-                        .HasForeignKey("AddressId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("ShareHubMIU.Domain.Entities.ApplicationUser", "Seller")
                         .WithMany()
                         .HasForeignKey("SellerId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
-
-                    b.Navigation("Location");
-
-                    b.Navigation("Seller");
-                });
-
-            modelBuilder.Entity("ShareHubMIU.Domain.Entities.CommonItem", b =>
-                {
-                    b.HasOne("ShareHubMIU.Domain.Entities.Address", "Location")
-                        .WithMany()
-                        .HasForeignKey("AddressId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("ShareHubMIU.Domain.Entities.ApplicationUser", "Seller")
-                        .WithMany()
-                        .HasForeignKey("SellerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Location");
 
                     b.Navigation("Seller");
                 });
@@ -780,25 +656,6 @@ namespace ShareHubMIU.Infrastructure.Migrations
                         .IsRequired();
 
                     b.Navigation("Buyer");
-                });
-
-            modelBuilder.Entity("ShareHubMIU.Domain.Entities.RoomSharing", b =>
-                {
-                    b.HasOne("ShareHubMIU.Domain.Entities.Address", "Location")
-                        .WithMany()
-                        .HasForeignKey("AddressId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("ShareHubMIU.Domain.Entities.ApplicationUser", "Seller")
-                        .WithMany()
-                        .HasForeignKey("SellerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Location");
-
-                    b.Navigation("Seller");
                 });
 
             modelBuilder.Entity("ShareHubMIU.Domain.Entities.UserReport", b =>
