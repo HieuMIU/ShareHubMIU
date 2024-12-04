@@ -20,5 +20,7 @@ namespace ShareHubMIU.Application.Common.Utility
         public const string StatusCancelled = "Cancelled";
         public const string StatusRefunded = "Refunded";
 
+        public const string CategoryTypeCar = "Car";
+
     }
 }

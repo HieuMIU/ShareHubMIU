@@ -9,8 +9,8 @@ using ShareHubMIU.Domain.Entities;
 
 namespace ShareHubMIU.Application.Common.Interface
 {
-    public interface IItemRepository : IRepository<Item>
+    public interface ICommonItemRepository : IRepository<CommonItem>
     {
-        void Update(Item entity);
+        void Update(CommonItem entity);
     }
 }

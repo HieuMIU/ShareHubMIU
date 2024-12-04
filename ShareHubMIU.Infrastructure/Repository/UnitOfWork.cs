@@ -13,14 +13,20 @@ namespace ShareHubMIU.Infrastructure.Repository
     {
         private readonly ApplicationDbContext _db;
 
-        public IItemRepository Item { get; private set; }
-
         public IApplicationUserRepository User { get; private set; }
+
+        public ICarSharingRepository CarSharing { get; private set; }
+
+        public IRoomSharingRepository RoomSharing { get; private set; }
+
+        public ICommonItemRepository CommonItem { get; private set; }
 
         public UnitOfWork(ApplicationDbContext db)
         {
             _db = db;
-            Item = new ItemRepository(_db);
+            CarSharing = new CarSharingRepository(db);
+            RoomSharing = new RoomSharingRepository(db);
+            CommonItem = new CommonItemRepository(db);
             User = new ApplicationUserRepository(_db);
         }
 
