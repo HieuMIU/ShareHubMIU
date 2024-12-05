@@ -17,6 +17,8 @@ namespace ShareHubMIU.Infrastructure.Data
 
         }
 
+        public DbSet<Item> Items { get; set; }
+
         public DbSet<CarSharing> CarSharings { get; set; }
 
         public DbSet<RoomSharing> RoomSharings { get; set; }

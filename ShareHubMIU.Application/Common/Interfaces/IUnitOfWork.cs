@@ -15,7 +15,9 @@ namespace ShareHubMIU.Application.Common.Interfaces
 
         ICommonItemRepository CommonItem { get; }
 
-        IApplicationUserRepository User { get; }    
+        IApplicationUserRepository User { get; }
+
+        IItemRepository Item { get; }
 
         void Save();
     }

@@ -1,0 +1,102 @@
+﻿@model RoomSharing
+
+<div class="w-100 card border-0 p-4">
+    <div class="card-header bg-success bg-gradient ml-0 py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-white py-2">Create Room Sharing</h2>
+            </div>
+        </div>
+    </div>
+    <div class="card-body border p-4">
+        <form method="post" class="row" enctype="multipart/form-data">
+            <div class="p-3">
+                @* <div asp-validation-summary="All"></div>  *@
+                <!-- Title -->
+                <div class="form-floating py-1 col-12">
+                    <input asp-for="Title" class="form-control border shadow" />
+                    <label asp-for="Title" class="ms-2"></label>
+                    <span asp-validation-for="Title" class="text-danger"></span>
+                </div>
+
+                <!-- Description -->
+                <div class="form-floating py-1 col-12">
+                    <input asp-for="Description" class="form-control border shadow" />
+                    <label asp-for="Description" class="ms-2"></label>
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+
+                <!-- Capacity -->
+                <div class="form-floating py-1 col-12">
+                    <input asp-for="Capacity" class="form-control border shadow" />
+                    <label asp-for="Capacity" class="ms-2"></label>
+                    <span asp-validation-for="Capacity" class="text-danger"></span>
+                </div>
+
+                <!-- Rent Per Month -->
+                <div class="form-floating py-1 col-12">
+                    <input asp-for="RentPerMonth" class="form-control border shadow" />
+                    <label asp-for="RentPerMonth" class="ms-2"></label>
+                    <span asp-validation-for="RentPerMonth" class="text-danger"></span>
+                </div>
+
+                <!-- Room Type -->
+                <div class="form-floating py-1 col-12">
+                    <input asp-for="RoomType" class="form-control border shadow" />
+                    <label asp-for="RoomType" class="ms-2"></label>
+                    <span asp-validation-for="RoomType" class="text-danger"></span>
+                </div>
+
+                <!-- Is Furnished -->
+                <div class="form-floating py-1 col-12">
+                    <select asp-for="IsFurnished" class="form-control border shadow">
+                        <option value="true">Yes</option>
+                        <option value="false">No</option>
+                    </select>
+                    <label asp-for="IsFurnished" class="ms-2"></label>
+                    <span asp-validation-for="IsFurnished" class="text-danger"></span>
+                </div>
+
+                <!-- Availability Date Range -->
+                <div class="row py-1">
+                    <div class="form-floating py-1 col-md-6">
+                        <input asp-for="AvailableFrom" class="form-control border shadow" type="date" />
+                        <label asp-for="AvailableFrom" class="ms-2"></label>
+                        <span asp-validation-for="AvailableFrom" class="text-danger"></span>
+                    </div>
+                    <div class="form-floating py-1 col-md-6">
+                        <input asp-for="AvailableUntil" class="form-control border shadow" type="date" />
+                        <label asp-for="AvailableUntil" class="ms-2"></label>
+                        <span asp-validation-for="AvailableUntil" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <!-- Image Upload -->
+                <div class="form-floating py-1 col-12">
+                    <input asp-for="Image" class="form-control border shadow" type="file" />
+                    <label asp-for="Image" class="ms-2"></label>
+                    <span asp-validation-for="Image" class="text-danger"></span>
+                </div>
+
+                <div class="row pt-2">
+                    <div class="col-6 col-md-3">
+                        <button type="submit" class="btn btn-success w-100">
+                            <i class="bi bi-check-circle"></i> Create
+                        </button>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <a asp-controller="Item" asp-action="CreateItemSharing" class="btn btn-secondary w-100">
+                            <i class="bi bi-x-circle"></i> Cancel
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}

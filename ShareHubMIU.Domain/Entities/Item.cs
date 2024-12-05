@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ShareHubMIU.Domain.Entities;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 
 namespace ShareHubMIU.Domain.Entities
 {
@@ -33,7 +34,8 @@ namespace ShareHubMIU.Domain.Entities
         public required string SellerId { get; set; }
 
         [ForeignKey("SellerId")]
-        public required ApplicationUser Seller { get; set; }
+        [ValidateNever]
+        public ApplicationUser Seller { get; set; }
 
         [NotMapped]
         public IFormFile? Image { get; set; }

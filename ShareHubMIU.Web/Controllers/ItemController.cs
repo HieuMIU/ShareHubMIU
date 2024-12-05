@@ -1,29 +1,52 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using ShareHubMIU.Application.Common.Interfaces;
 using ShareHubMIU.Application.Common.Utility;
 using ShareHubMIU.Application.Services.Interfaces;
 using ShareHubMIU.Domain.Entities;
-using ShareHubMIU.Infrastructure.Data;
+using System.Security.Claims;
 
 namespace ShareHubMIU.Web.Controllers
 {
-    [Authorize(Roles = SD.Role_Admin)]
+    [Authorize(Roles = SD.Role_Customer)]
     public class ItemController : Controller
     {
-        private readonly ICarSharingService _ItemService;
+        private readonly ICarSharingService _carSharingService;
 
-        public ItemController(ICarSharingService ItemService)
+        private readonly IRoomSharingService _roomSharingService;
+
+        private readonly ICommonItemService _commonItemService;
+
+        private readonly IItemService _itemService;
+
+        private readonly UserManager<ApplicationUser> _userManager;
+
+        public ItemController(ICarSharingService carSharingService, 
+                                IRoomSharingService roomSharingService, 
+                                ICommonItemService commonItemService, 
+                                IItemService itemService,
+                                UserManager<ApplicationUser> userManager)
         {
-            _ItemService = ItemService;
+            _carSharingService = carSharingService;
+            _roomSharingService = roomSharingService;
+            _commonItemService = commonItemService;
+            _itemService = itemService;
+            _userManager = userManager;
         }
 
         public IActionResult Index()
         {
-            var carSharings = _ItemService.GetAllCarSharings();
-            return View(carSharings);
+            var items = _itemService.GetAllItems();
+            return View(items);
+        }
+
+        public IActionResult CustomerIndex()
+        {
+            var claimsIdentity = (ClaimsIdentity)User.Identity;
+            var userId = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier).Value;
+            var items = _itemService.GetAllItems(userId);
+
+            return View(items);
         }
 
         public IActionResult Create()
@@ -31,20 +54,61 @@ namespace ShareHubMIU.Web.Controllers
             return View();
         }
 
-        //[HttpPost]
-        //public IActionResult Create(ItemVM ItemVM)
-        //{
-        //    _ItemService.CreateItem(ItemVM.Item);
-        //    TempData["success"] = "The Item has been created successfully.";
-        //    return RedirectToAction(nameof(Index));
+        public IActionResult CreateCarSharing()
+        {
+            return View();
+        }
 
-        //    if (nameExists)
-        //    {
-        //        TempData["error"] = "The Item already exists.";
-        //    }
-        //    return View(ItemVM);
-        //}
+        public IActionResult CreateRoomSharing()
+        {
+            return View();
+        }
 
+        public IActionResult CreateCommonItem()
+        {
+            var claimsIdentity = (ClaimsIdentity)User.Identity;
+            var userId = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier).Value;
+            CommonItem commonItem = new CommonItem()
+            {
+                SellerId = userId,
+                Type = "CommonItem"
+            };
+            return View(commonItem);
+        }
+
+        [HttpPost]
+        public IActionResult CreateCarSharing(CarSharing carSharing)
+        {
+            if (ModelState.IsValid)
+            {
+                _carSharingService.CreateCarSharing(carSharing);
+                TempData["success"] = "The Item has been created successfully.";
+                return RedirectToAction(nameof(CustomerIndex));
+            }
+            return View();
+        }
+        [HttpPost]
+        public IActionResult CreateRoomSharing(RoomSharing roomSharing)
+        {
+            if (ModelState.IsValid)
+            {
+                _roomSharingService.CreateRoomSharing(roomSharing);
+                TempData["success"] = "The Item has been created successfully.";
+                return RedirectToAction(nameof(CustomerIndex));
+            }
+            return View();
+        }
+        [HttpPost]
+        public IActionResult CreateCommonItem(CommonItem commonItem)
+        {
+            if (ModelState.IsValid)
+            {
+                _commonItemService.CreateCommonItem(commonItem);
+                TempData["success"] = "The Item has been created successfully.";
+                return RedirectToAction(nameof(CustomerIndex));
+            }
+            return View();
+        }
         //public IActionResult Update(int ItemId)
         //{
         //    ItemVM ItemVM = new ItemVM()
