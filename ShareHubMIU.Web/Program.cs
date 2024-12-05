@@ -1,7 +1,11 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using ShareHubMIU.Application.Common.Interfaces;
+using ShareHubMIU.Application.Services.Implementations;
+using ShareHubMIU.Application.Services.Interfaces;
 using ShareHubMIU.Domain.Entities;
 using ShareHubMIU.Infrastructure.Data;
+using ShareHubMIU.Infrastructure.Repository;
 using Stripe;
 using Syncfusion.Licensing;
 
@@ -27,6 +31,13 @@ builder.Services.Configure<IdentityOptions>(options =>
     options.Password.RequiredLength = 8;
 });
 
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+builder.Services.AddScoped<IDbInitializer, DbInitializer>();
+
+builder.Services.AddScoped<IItemService, ItemService>();
+builder.Services.AddScoped<ICarSharingService, CarSharingService>();
+builder.Services.AddScoped<IRoomSharingService, RoomSharingService>();
+builder.Services.AddScoped<ICommonItemService, CommonItemService>();
 
 var app = builder.Build();
 
@@ -49,8 +60,19 @@ app.UseRouting();
 
 app.UseAuthorization();
 
+SeedDatabase();
+
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
+
+void SeedDatabase()
+{
+    using (var scope = app.Services.CreateScope())
+    {
+        var dbInitalizer = scope.ServiceProvider.GetRequiredService<IDbInitializer>();
+        dbInitalizer.Initialize();
+    }
+}
