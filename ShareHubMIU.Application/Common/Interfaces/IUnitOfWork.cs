@@ -19,6 +19,8 @@ namespace ShareHubMIU.Application.Common.Interfaces
 
         IItemRepository Item { get; }
 
+        IRequestRepository Request { get; }
+
         void Save();
     }
 }

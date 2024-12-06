@@ -14,10 +14,10 @@
                                 <div class="d-flex justify-content-between">
                                     <p class="card-title text-warning" style="font-size:xx-large">@item.Title</p>
                                     <div class="pt-2">
-                                        <button asp-controller="Request" asp-action="RequestContact"
-                                                asp-route-id="@item.Id" type="submit" class="btn btn-outline-warning">
-                                            <i class="bi bi-file-earmark-ppt"></i> Request Seller's Contact
-                                        </button>
+                                        <a asp-controller="Request" asp-action="RequestItem" asp-route-itemId="@item.Id"
+                                           class="btn btn-info mx-2">
+                                            <i class="bi bi-eye"></i> Request This Item
+                                        </a>
                                     </div>
                                 </div>
                                 <p class="card-text">

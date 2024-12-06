@@ -38,12 +38,9 @@ builder.Services.AddScoped<IItemService, ItemService>();
 builder.Services.AddScoped<ICarSharingService, CarSharingService>();
 builder.Services.AddScoped<IRoomSharingService, RoomSharingService>();
 builder.Services.AddScoped<ICommonItemService, CommonItemService>();
+builder.Services.AddScoped<IRequestService, RequestService>();
 
 var app = builder.Build();
-
-StripeConfiguration.ApiKey = builder.Configuration.GetSection("Stripe:SecretKey").Get<string>();
-
-SyncfusionLicenseProvider.RegisterLicense(builder.Configuration.GetSection("Syncfusion:LicenseKey").Get<string>());
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
@@ -64,7 +61,7 @@ SeedDatabase();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Account}/{action=Login}/{id?}");
 
 app.Run();
 

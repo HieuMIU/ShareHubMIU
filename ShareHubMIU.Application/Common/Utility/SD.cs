@@ -32,5 +32,10 @@ namespace ShareHubMIU.Application.Common.Utility
         public const string ItemStatusSold = "Sold";
         public const string ItemStatusCancelled = "Cancelled";
 
+
+        public const string RequestStatusNew = "New";
+        public const string RequestStatusPending = "Pending";
+        public const string RequestStatusApproved = "Approved";
+        public const string RequestStatusRejected = "Rejected";
     }
 }

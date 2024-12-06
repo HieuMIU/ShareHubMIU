@@ -51,7 +51,7 @@ namespace ShareHubMIU.Web.Controllers
 
                     if( await _userManager.IsInRoleAsync(user, SD.Role_Admin))
                     {
-                        return RedirectToAction("Index", "Dashboard");
+                        return RedirectToAction("AdminItem", "Index");
                     }
                     else
                     {

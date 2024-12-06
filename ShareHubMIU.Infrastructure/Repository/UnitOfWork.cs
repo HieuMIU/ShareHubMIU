@@ -23,6 +23,8 @@ namespace ShareHubMIU.Infrastructure.Repository
 
         public IItemRepository Item { get; private set; }
 
+        public IRequestRepository Request { get; private set; }
+
         public UnitOfWork(ApplicationDbContext db)
         {
             _db = db;
@@ -31,6 +33,7 @@ namespace ShareHubMIU.Infrastructure.Repository
             CommonItem = new CommonItemRepository(db);
             User = new ApplicationUserRepository(_db);
             Item = new ItemRepository(_db);
+            Request = new RequestRepository(_db);
         }
 
         public void Save()

@@ -33,8 +33,6 @@ namespace ShareHubMIU.Infrastructure.Data
 
         public DbSet<UserReport> UserReports { get; set; }
 
-        //public DbSet<Address> Addresses { get; set; }
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

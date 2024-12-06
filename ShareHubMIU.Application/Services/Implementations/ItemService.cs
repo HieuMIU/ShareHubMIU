@@ -24,5 +24,10 @@ namespace ShareHubMIU.Application.Services.Implementations
                                                     && (status == null || status == u.Status)
                                                     && (type == null || type == u.Type));
         }
+
+        public Item GetItemById(int id)
+        {
+            return _unitOfWork.Item.Get(u => u.Id == id, includeProperties: "Seller");
+        }
     }
 }

@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 
 namespace ShareHubMIU.Domain.Entities
 {
@@ -16,15 +17,15 @@ namespace ShareHubMIU.Domain.Entities
         public int ItemId { get; set; }
 
         [ForeignKey("ItemId")]
-        public Item Item { get; set; }
-
-        public string Type { get; set; }
+        [ValidateNever]
+        public Item? Item { get; set; }
 
         [Required]
         public string BuyerId { get; set; }
 
         [ForeignKey("BuyerId")]
-        public ApplicationUser Buyer { get; set; }
+        [ValidateNever]
+        public ApplicationUser? Buyer { get; set; }
 
         public string Status { get; set; }
 

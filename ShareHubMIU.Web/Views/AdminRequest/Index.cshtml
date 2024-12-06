@@ -1,0 +1,77 @@
+﻿@model IEnumerable<ShareHubMIU.Domain.Entities.Request>
+
+<div class="w-100 card border-0 p-4">
+    <div class="card-header bg-success bg-gradient ml-0 py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-white py-2">Selling Requests</h2>
+            </div>
+        </div>
+    </div>
+    <div class="card-body border p-4">
+        <div class="row pb-3">
+            <div class="col-6 offset-6 text-end">
+            </div>
+        </div>
+
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Seller Name</th>
+                    <th>Buyer Name</th>
+                    <th>Date Request</th>
+                    <th>Status?</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var obj in Model)
+                {
+                    <tr>
+                        <td>@obj.Item.Title</td>
+                        <td>@obj.Item.Seller.Name</td>
+                        <td>@obj.Buyer.Name</td>
+                        <td>@obj.CreatedDate</td>
+                        <td class="text-center align-middle">
+                            @if (obj.Status == "New")
+                            {
+                                <a
+                                   class="btn btn-success mx-2">
+                                    New
+                                </a>
+                            }
+                            else if (obj.Status == "Approved")
+                            {
+                                <a class="btn btn-primary mx-2">
+                                    Approved
+                                </a>
+                            }
+                            else if (obj.Status == "Rejected")
+                            {
+                                <a class="btn btn-danger mx-2">
+                                    Rejected
+                                </a>
+                            }
+                        </td>                  
+                        <td>
+                            <div class="w-75 btn-group" role="group">
+                                <a asp-controller="AdminRequest" asp-action="ViewDetail" asp-route-itemId="@obj.Id"
+                                   class="btn btn-info mx-2">
+                                    <i class="bi bi-eye"></i> View
+                                </a>
+                                @if (obj.Status == SD.RequestStatusNew.ToString())
+                                {
+                                    <a asp-controller="AdminRequest" asp-action="Cancel" asp-route-itemId="@obj.Id"
+                                       class="btn btn-success mx-2">
+                                        <i class="bi bi-pencil-square"></i> Cancel
+                                    </a>
+                                }
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

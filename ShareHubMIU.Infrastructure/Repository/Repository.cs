@@ -51,7 +51,7 @@ namespace ShareHubMIU.Infrastructure.Repository
                 foreach (var includeProp in includeProperties
                     .Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
                 {
-                    query = query.Include(includeProp.Trim());
+                    query = query.Include(includeProp.Trim()).AsNoTracking();
                 }
             }
             return query.FirstOrDefault();
@@ -77,7 +77,7 @@ namespace ShareHubMIU.Infrastructure.Repository
                 foreach (var includeProp in includeProperties
                     .Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
                 {
-                    query = query.Include(includeProp.Trim());
+                    query = query.Include(includeProp.Trim()).AsNoTracking();
                 }
             }
             return query.ToList();

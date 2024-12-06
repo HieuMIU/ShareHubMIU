@@ -13,5 +13,7 @@ namespace ShareHubMIU.Application.Services.Interfaces
     public interface IItemService
     {
         IEnumerable<Item> GetAllItems(string? userId = null, string? status = null, string? type = null);
+
+        Item GetItemById(int id);
     }
 }
