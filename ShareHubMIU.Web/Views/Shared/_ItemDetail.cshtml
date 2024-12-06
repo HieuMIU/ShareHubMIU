@@ -1,0 +1,38 @@
+﻿@model Item
+
+<div class="row">
+    <div class="col-12 col-md-5">
+        <img src="@Model.ImageUrl" style="border-radius:10px;" width="100%" />
+    </div>
+    <div class="col-12 col-md-7">
+        <div class="row p-2">
+            <div class="col-12">
+                <p class="card-title text-warning" style="font-size:xx-large">@Model.Title</p>
+                <p class="card-text" style="font-size:large">
+                    @Html.Raw(Model.Description)
+                </p>
+                <p class="card-text" style="font-size:large">
+                    @String.Format("{0},{1},{2},{3},{4}", Model.AddressLine1, Model.AddressLine2, Model.City, Model.State, Model.ZipCode)
+                </p>
+                <p class="card-text" style="font-size:large">
+                    Date Listed: @Model.DateListed
+                </p>
+        </div>
+        <div class="row col-12">
+            <span class="text-end p-0 pt-3 m-0">
+                <p class="text-warning font-weight-bold pt-1">
+                        @if (Model.Price == 0)
+                        {
+                            <span style="color:green">Free</span>
+                        }
+                        else
+                        {                           
+                            <span style = "#ff6a00">
+                                USD @Model.Price.ToString("c")
+                            </span>
+                        }                   
+                </p>
+            </span>
+        </div>
+    </div>
+</div>

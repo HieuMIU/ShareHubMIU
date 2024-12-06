@@ -18,9 +18,11 @@ namespace ShareHubMIU.Application.Services.Implementations
             _unitOfWork = unitOfWork;
         }
 
-        public IEnumerable<Item> GetAllItems(string? userId = null)
+        public IEnumerable<Item> GetAllItems(string? userId = null, string? status = null, string? type = null)
         {
-            return _unitOfWork.Item.GetAll(u => userId == null || userId == u.SellerId);
+            return _unitOfWork.Item.GetAll(u => (userId == null || userId == u.SellerId)
+                                                    && (status == null || status == u.Status)
+                                                    && (type == null || type == u.Type));
         }
     }
 }

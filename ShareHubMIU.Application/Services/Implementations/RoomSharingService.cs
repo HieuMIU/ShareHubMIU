@@ -20,27 +20,48 @@ namespace ShareHubMIU.Application.Services.Implementations
 
         public void CreateRoomSharing(RoomSharing roomSharing)
         {
-            throw new NotImplementedException();
+            ArgumentNullException.ThrowIfNull(roomSharing);
+
+            //set default value
+            roomSharing.DateListed = DateTime.Now;
+
+            _unitOfWork.RoomSharing.Add(roomSharing);
+            _unitOfWork.Save();
         }
 
         public bool DeleteRoomSharing(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                RoomSharing? objFromDb = _unitOfWork.RoomSharing.Get(u => u.Id == id);
+                if (objFromDb is not null)
+                {
+                    _unitOfWork.RoomSharing.Remove(objFromDb);
+                    _unitOfWork.Save();
+                    return true;
+                }
+                return false;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
 
         public IEnumerable<RoomSharing> GetAllRoomSharings()
         {
-            throw new NotImplementedException();
+            return _unitOfWork.RoomSharing.GetAll();
         }
 
         public RoomSharing GetItemById(int id)
         {
-            throw new NotImplementedException();
+            return _unitOfWork.RoomSharing.Get(u => u.Id == id);
         }
 
-        public void UpdateRoomSharing(RoomSharing RoomSharing)
+        public void UpdateRoomSharing(RoomSharing roomSharing)
         {
-            throw new NotImplementedException();
+            _unitOfWork.RoomSharing.Update(roomSharing);
+            _unitOfWork.Save();
         }
     }
 }

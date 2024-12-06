@@ -11,7 +11,9 @@
     <div class="card-body border p-4">
         <form method="post" class="row" enctype="multipart/form-data">
             <input asp-for="CarSharing.SellerId" hidden />
+            <input asp-for="CarSharing.Id" hidden />
             <input asp-for="CarSharing.Type" hidden />
+            <input asp-for="CarSharing.Status" hidden />
             <div class="p-3">
                 @* <div asp-validation-summary="All"></div>  *@
                 <!-- General Info Section -->
@@ -19,14 +21,14 @@
                 <hr>
                 <!-- Title -->
                 <div class="form-floating py-1 col-12">
-                    <input asp-for="CarSharing.Title" class="form-control border shadow" />
+                    <input asp-for="CarSharing.Title" disabled class="form-control border shadow" />
                     <label asp-for="CarSharing.Title" class="ms-2"></label>
                     <span asp-validation-for="CarSharing.Title" class="text-danger"></span>
                 </div>
 
                 <!-- Description -->
                 <div class="form-floating py-1 col-12">
-                    <input asp-for="CarSharing.Description" class="form-control border shadow" />
+                    <input asp-for="CarSharing.Description" disabled class="form-control border shadow" />
                     <label asp-for="CarSharing.Description" class="ms-2"></label>
                     <span asp-validation-for="CarSharing.Description" class="text-danger"></span>
                 </div>
@@ -35,7 +37,7 @@
                 <h5 class="mb-3">Details</h5>
                 <div class="form-floating py-1 col-12">
                     <select asp-for="@Model.CarSharing.Condition" asp-items="@Model.Conditions"
-                            class="form-select border shadow">
+                            disabled class="form-select border shadow">
                         <option disabled selected>--Select Condition--</option>
                     </select>
                     <label asp-for="CarSharing.Condition" class="ms-2"></label>
@@ -43,63 +45,63 @@
                 </div>
                 <!-- Make -->
                 <div class="form-floating py-1 col-12">
-                    <input asp-for="CarSharing.Make" class="form-control border shadow" />
+                    <input asp-for="CarSharing.Make" disabled class="form-control border shadow" />
                     <label asp-for="CarSharing.Make" class="ms-2"></label>
                     <span asp-validation-for="CarSharing.Make" class="text-danger"></span>
                 </div>
 
                 <!-- Model -->
                 <div class="form-floating py-1 col-12">
-                    <input asp-for="CarSharing.Model" class="form-control border shadow" />
+                    <input asp-for="CarSharing.Model" disabled class="form-control border shadow" />
                     <label asp-for="CarSharing.Model" class="ms-2"></label>
                     <span asp-validation-for="CarSharing.Model" class="text-danger"></span>
                 </div>
 
                 <!-- Year -->
                 <div class="form-floating py-1 col-12">
-                    <input asp-for="CarSharing.Year" class="form-control border shadow" />
+                    <input asp-for="CarSharing.Year" disabled class="form-control border shadow" />
                     <label asp-for="CarSharing.Year" class="ms-2"></label>
                     <span asp-validation-for="CarSharing.Year" class="text-danger"></span>
                 </div>
 
                 <!-- Color -->
                 <div class="form-floating py-1 col-12">
-                    <input asp-for="CarSharing.Color" class="form-control border shadow" />
+                    <input asp-for="CarSharing.Color" disabled class="form-control border shadow" />
                     <label asp-for="CarSharing.Color" class="ms-2"></label>
                     <span asp-validation-for="CarSharing.Color" class="text-danger"></span>
                 </div>
 
                 <!-- Mileage -->
                 <div class="form-floating py-1 col-12">
-                    <input asp-for="CarSharing.Mileage" class="form-control border shadow" />
+                    <input asp-for="CarSharing.Mileage" disabled class="form-control border shadow" />
                     <label asp-for="CarSharing.Mileage" class="ms-2"></label>
                     <span asp-validation-for="CarSharing.Mileage" class="text-danger"></span>
                 </div>
 
                 <!-- Fuel Type -->
                 <div class="form-floating py-1 col-12">
-                    <input asp-for="CarSharing.FuelType" class="form-control border shadow" />
+                    <input asp-for="CarSharing.FuelType" disabled class="form-control border shadow" />
                     <label asp-for="CarSharing.FuelType" class="ms-2"></label>
                     <span asp-validation-for="CarSharing.FuelType" class="text-danger"></span>
                 </div>
 
                 <!-- Transmission -->
                 <div class="form-floating py-1 col-12">
-                    <input asp-for="CarSharing.Transmission" class="form-control border shadow" />
+                    <input asp-for="CarSharing.Transmission" disabled class="form-control border shadow" />
                     <label asp-for="CarSharing.Transmission" class="ms-2"></label>
                     <span asp-validation-for="CarSharing.Transmission" class="text-danger"></span>
                 </div>
 
                 <!-- Number of Seats -->
                 <div class="form-floating py-1 col-12">
-                    <input asp-for="CarSharing.NumberOfSeats" class="form-control border shadow" />
+                    <input asp-for="CarSharing.NumberOfSeats" disabled class="form-control border shadow" />
                     <label asp-for="CarSharing.NumberOfSeats" class="ms-2"></label>
                     <span asp-validation-for="CarSharing.NumberOfSeats" class="text-danger"></span>
                 </div>
 
                 <!-- Price Per Day -->
                 <div class="form-floating py-1 col-12">
-                    <input asp-for="CarSharing.Price" class="form-control border shadow" />
+                    <input asp-for="CarSharing.Price" disabled class="form-control border shadow" />
                     <label asp-for="CarSharing.Price" class="ms-2"></label>
                     <span asp-validation-for="CarSharing.Price" class="text-danger"></span>
                 </div>
@@ -107,12 +109,12 @@
                 <!-- Availability Date Range -->
                 <div class="row py-1">
                     <div class="form-floating py-1 col-md-6">
-                        <input asp-for="CarSharing.AvailableFrom" class="form-control border shadow" type="date" />
+                        <input asp-for="CarSharing.AvailableFrom" disabled class="form-control border shadow" type="date" />
                         <label asp-for="CarSharing.AvailableFrom" class="ms-2"></label>
                         <span asp-validation-for="CarSharing.AvailableFrom" class="text-danger"></span>
                     </div>
                     <div class="form-floating py-1 col-md-6">
-                        <input asp-for="CarSharing.AvailableUntil" class="form-control border shadow" type="date" />
+                        <input asp-for="CarSharing.AvailableUntil" disabled class="form-control border shadow" type="date" />
                         <label asp-for="CarSharing.AvailableUntil" class="ms-2"></label>
                         <span asp-validation-for="CarSharing.AvailableUntil" class="text-danger"></span>
                     </div>
@@ -120,7 +122,7 @@
 
                 <!-- Image Upload -->
                 <div class="form-floating py-1 col-12">
-                    <input asp-for="CarSharing.Image" class="form-control border shadow" type="file" />
+                    <input asp-for="CarSharing.Image" disabled class="form-control border shadow" type="file" />
                     <label asp-for="CarSharing.Image" class="ms-2"></label>
                     <span asp-validation-for="CarSharing.Image" class="text-danger"></span>
                 </div>
@@ -128,40 +130,44 @@
                 <hr>
                 <h5 class="mb-3">Address</h5>
                 <div class="form-floating py-1 col-12">
-                    <input asp-for="CarSharing.AddressLine1" class="form-control border shadow" />
+                    <input asp-for="CarSharing.AddressLine1" disabled class="form-control border shadow" />
                     <label asp-for="CarSharing.AddressLine1" class="ms-2"></label>
                     <span asp-validation-for="CarSharing.AddressLine1" class="text-danger"></span>
                 </div>
 
                 <div class="form-floating py-1 col-12">
-                    <input asp-for="CarSharing.AddressLine2" class="form-control border shadow" />
+                    <input asp-for="CarSharing.AddressLine2" disabled class="form-control border shadow" />
                     <label asp-for="CarSharing.AddressLine2" class="ms-2"></label>
                     <span asp-validation-for="CarSharing.AddressLine2" class="text-danger"></span>
                 </div>
 
                 <div class="form-floating py-1 col-12">
-                    <input asp-for="CarSharing.City" class="form-control border shadow" />
+                    <input asp-for="CarSharing.City" disabled class="form-control border shadow" />
                     <label asp-for="CarSharing.City" class="ms-2"></label>
                     <span asp-validation-for="CarSharing.City" class="text-danger"></span>
                 </div>
 
                 <div class="form-floating py-1 col-12">
-                    <input asp-for="CarSharing.State" class="form-control border shadow" />
+                    <input asp-for="CarSharing.State" disabled class="form-control border shadow" />
                     <label asp-for="CarSharing.State" class="ms-2"></label>
                     <span asp-validation-for="CarSharing.State" class="text-danger"></span>
                 </div>
 
                 <div class="form-floating py-1 col-12">
-                    <input asp-for="CarSharing.ZipCode" class="form-control border shadow" />
+                    <input asp-for="CarSharing.ZipCode" disabled class="form-control border shadow" />
                     <label asp-for="CarSharing.ZipCode" class="ms-2"></label>
                     <span asp-validation-for="CarSharing.ZipCode" class="text-danger"></span>
                 </div>
                 <div class="row pt-2">
-                    <div class="col-6 col-md-3">
-                        <button type="submit" class="btn btn-success w-100">
-                            <i class="bi bi-check-circle"></i> Create
-                        </button>
-                    </div>
+                    @if (Model.CarSharing.Status == SD.ItemStatusAvailable)
+                    {
+                        <div class="col-6 col-md-3">
+                            <a asp-controller="Item" asp-action="UpdateStatusCarSharing" asp-route-itemId="@Model.CarSharing.Id" asp-route-status="@SD.ItemStatusCancelled"
+                               class="btn btn-danger mx-2">
+                                <i class="bi bi-trash-fill"></i> Delete
+                            </a>
+                        </div>
+                    }
                     <div class="col-6 col-md-3">
                         <a asp-controller="Item" asp-action="Index" class="btn btn-secondary w-100">
                             <i class="bi bi-x-circle"></i> Cancel

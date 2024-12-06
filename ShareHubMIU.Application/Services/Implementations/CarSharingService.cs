@@ -20,27 +20,48 @@ namespace ShareHubMIU.Application.Services.Implementations
 
         public void CreateCarSharing(CarSharing carSharing)
         {
-            throw new NotImplementedException();
+            ArgumentNullException.ThrowIfNull(carSharing);
+
+            //set default value
+            carSharing.DateListed = DateTime.Now;
+
+            _unitOfWork.CarSharing.Add(carSharing);
+            _unitOfWork.Save();
         }
 
         public bool DeleteCarSharing(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                CarSharing? objFromDb = _unitOfWork.CarSharing.Get(u => u.Id == id);
+                if (objFromDb is not null)
+                {
+                    _unitOfWork.CarSharing.Remove(objFromDb);
+                    _unitOfWork.Save();
+                    return true;
+                }
+                return false;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
 
         public IEnumerable<CarSharing> GetAllCarSharings()
         {
-            throw new NotImplementedException();
+            return _unitOfWork.CarSharing.GetAll();
         }
 
         public CarSharing GetItemById(int id)
         {
-            throw new NotImplementedException();
+            return _unitOfWork.CarSharing.Get(u => u.Id == id);
         }
 
         public void UpdateCarSharing(CarSharing carSharing)
         {
-            throw new NotImplementedException();
+            _unitOfWork.CarSharing.Update(carSharing);
+            _unitOfWork.Save();
         }
     }
 }

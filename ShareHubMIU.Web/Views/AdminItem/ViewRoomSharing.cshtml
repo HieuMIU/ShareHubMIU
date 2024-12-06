@@ -12,13 +12,15 @@
         <form method="post" class="row" enctype="multipart/form-data">
             <input asp-for="RoomSharing.SellerId" hidden />
             <input asp-for="RoomSharing.Type" hidden />
+            <input asp-for="RoomSharing.Id" hidden />
+            <input asp-for="RoomSharing.Status" hidden />
             <div class="p-3">
                 @* <div asp-validation-summary="All"></div>  *@
                 <h5 class="mb-3">General Info</h5>
                 <hr>
                 <!-- Title -->
                 <div class="form-floating py-1 col-12">
-                    <input asp-for="RoomSharing.Title" class="form-control border shadow" />
+                    <input asp-for="RoomSharing.Title" disabled class="form-control border shadow" />
                     <label asp-for="RoomSharing.Title" class="ms-2"></label>
                     <span asp-validation-for="RoomSharing.Title" class="text-danger"></span>
                 </div>
@@ -27,7 +29,7 @@
                 <h5 class="mb-3">Details</h5>
                 <div class="form-floating py-1 col-12">
                     <select asp-for="@Model.RoomSharing.RoomType" asp-items="@Model.RoomTypes"
-                            class="form-select border shadow">
+                            disabled class="form-select border shadow">
                         <option disabled selected>--Select Condition--</option>
                     </select>
                     <label asp-for="RoomSharing.RoomType" class="ms-2"></label>
@@ -35,35 +37,35 @@
                 </div>
                 <!-- Description -->
                 <div class="form-floating py-1 col-12">
-                    <input asp-for="RoomSharing.Description" class="form-control border shadow" />
+                    <input asp-for="RoomSharing.Description" disabled class="form-control border shadow" />
                     <label asp-for="RoomSharing.Description" class="ms-2"></label>
                     <span asp-validation-for="RoomSharing.Description" class="text-danger"></span>
                 </div>
 
                 <!-- Capacity -->
                 <div class="form-floating py-1 col-12">
-                    <input asp-for="RoomSharing.Capacity" class="form-control border shadow" />
+                    <input asp-for="RoomSharing.Capacity" disabled class="form-control border shadow" />
                     <label asp-for="RoomSharing.Capacity" class="ms-2"></label>
                     <span asp-validation-for="RoomSharing.Capacity" class="text-danger"></span>
                 </div>
 
                 <!-- Rent Per Month -->
                 <div class="form-floating py-1 col-12">
-                    <input asp-for="RoomSharing.Price" class="form-control border shadow" />
+                    <input asp-for="RoomSharing.Price" disabled class="form-control border shadow" />
                     <label class="ms-2">Rent per month</label>
                     <span asp-validation-for="RoomSharing.Price" class="text-danger"></span>
                 </div>
 
                 <!-- Room Type -->
                 <div class="form-floating py-1 col-12">
-                    <input asp-for="RoomSharing.RoomType" class="form-control border shadow" />
+                    <input asp-for="RoomSharing.RoomType" disabled class="form-control border shadow" />
                     <label asp-for="RoomSharing.RoomType" class="ms-2"></label>
                     <span asp-validation-for="RoomSharing.RoomType" class="text-danger"></span>
                 </div>
 
                 <!-- Is Furnished -->
                 <div class="form-floating py-1 col-12">
-                    <select asp-for="RoomSharing.IsFurnished" class="form-control border shadow">
+                    <select asp-for="RoomSharing.IsFurnished" disabled class="form-control border shadow">
                         <option value="true">Yes</option>
                         <option value="false">No</option>
                     </select>
@@ -74,12 +76,12 @@
                 <!-- Availability Date Range -->
                 <div class="row py-1">
                     <div class="form-floating py-1 col-md-6">
-                        <input asp-for="RoomSharing.AvailableFrom" class="form-control border shadow" type="date" />
+                        <input asp-for="RoomSharing.AvailableFrom" disabled class="form-control border shadow" type="date" />
                         <label asp-for="RoomSharing.AvailableFrom" class="ms-2"></label>
                         <span asp-validation-for="RoomSharing.AvailableFrom" class="text-danger"></span>
                     </div>
                     <div class="form-floating py-1 col-md-6">
-                        <input asp-for="RoomSharing.AvailableUntil" class="form-control border shadow" type="date" />
+                        <input asp-for="RoomSharing.AvailableUntil" disabled class="form-control border shadow" type="date" />
                         <label asp-for="RoomSharing.AvailableUntil" class="ms-2"></label>
                         <span asp-validation-for="RoomSharing.AvailableUntil" class="text-danger"></span>
                     </div>
@@ -87,7 +89,7 @@
 
                 <!-- Image Upload -->
                 <div class="form-floating py-1 col-12">
-                    <input asp-for="RoomSharing.Image" class="form-control border shadow" type="file" />
+                    <input asp-for="RoomSharing.Image" disabled class="form-control border shadow" type="file" />
                     <label asp-for="RoomSharing.Image" class="ms-2"></label>
                     <span asp-validation-for="RoomSharing.Image" class="text-danger"></span>
                 </div>
@@ -95,42 +97,37 @@
                 <hr>
                 <h5 class="mb-3">Address</h5>
                 <div class="form-floating py-1 col-12">
-                    <input asp-for="RoomSharing.AddressLine1" class="form-control border shadow" />
+                    <input asp-for="RoomSharing.AddressLine1" disabled class="form-control border shadow" />
                     <label asp-for="RoomSharing.AddressLine1" class="ms-2"></label>
                     <span asp-validation-for="RoomSharing.AddressLine1" class="text-danger"></span>
                 </div>
 
                 <div class="form-floating py-1 col-12">
-                    <input asp-for="RoomSharing.AddressLine2" class="form-control border shadow" />
+                    <input asp-for="RoomSharing.AddressLine2" disabled class="form-control border shadow" />
                     <label asp-for="RoomSharing.AddressLine2" class="ms-2"></label>
                     <span asp-validation-for="RoomSharing.AddressLine2" class="text-danger"></span>
                 </div>
 
                 <div class="form-floating py-1 col-12">
-                    <input asp-for="RoomSharing.City" class="form-control border shadow" />
+                    <input asp-for="RoomSharing.City" disabled class="form-control border shadow" />
                     <label asp-for="RoomSharing.City" class="ms-2"></label>
                     <span asp-validation-for="RoomSharing.City" class="text-danger"></span>
                 </div>
 
                 <div class="form-floating py-1 col-12">
-                    <input asp-for="RoomSharing.State" class="form-control border shadow" />
+                    <input asp-for="RoomSharing.State" disabled class="form-control border shadow" />
                     <label asp-for="RoomSharing.State" class="ms-2"></label>
                     <span asp-validation-for="RoomSharing.State" class="text-danger"></span>
                 </div>
 
                 <div class="form-floating py-1 col-12">
-                    <input asp-for="RoomSharing.ZipCode" class="form-control border shadow" />
+                    <input asp-for="RoomSharing.ZipCode" disabled class="form-control border shadow" />
                     <label asp-for="RoomSharing.ZipCode" class="ms-2"></label>
                     <span asp-validation-for="RoomSharing.ZipCode" class="text-danger"></span>
                 </div>
                 <div class="row pt-2">
                     <div class="col-6 col-md-3">
-                        <button type="submit" class="btn btn-success w-100">
-                            <i class="bi bi-check-circle"></i> Create
-                        </button>
-                    </div>
-                    <div class="col-6 col-md-3">
-                        <a asp-controller="Item" asp-action="Index" class="btn btn-secondary w-100">
+                        <a asp-controller="AdminItem" asp-action="Index" class="btn btn-secondary w-100">
                             <i class="bi bi-x-circle"></i> Cancel
                         </a>
                     </div>

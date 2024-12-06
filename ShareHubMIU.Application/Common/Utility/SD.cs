@@ -13,14 +13,24 @@ namespace ShareHubMIU.Application.Common.Utility
         public const string Role_Admin = "Admin";
         public const string Role_Customer = "Customer";
 
-        public const string StatusPending = "Pending";
-        public const string StatusApproved = "Approved";
-        public const string StatusCheckedIn = "CheckedIn";
-        public const string StatusCompleted = "Completed";
-        public const string StatusCancelled = "Cancelled";
-        public const string StatusRefunded = "Refunded";
+        public const string CategoryTypeCarSharing = "CarSharing";
+        public const string CategoryTypeRoomSharing = "RoomSharing";
+        public const string CategoryTypeFuniture = "Funiture";
+        public const string CategoryTypeElectronics = "Electronics";
+        public const string CategoryTypeMiscellaneous = "Miscellaneous";
 
-        public const string CategoryTypeCar = "Car";
+        public const string ConditionNew = "New";
+        public const string ConditionUsedLikeNew = "UsedLikeNew";
+        public const string ConditionUsedGood = "UsedGood";
+        public const string ConditionUsedFair = "UsedFair";
+
+        public const string RoomTypeSingle = "Single";
+        public const string RoomTypeShared = "Shared";
+
+        public const string ItemStatusAvailable = "Available";
+        public const string ItemStatusReserved = "Reserved";
+        public const string ItemStatusSold = "Sold";
+        public const string ItemStatusCancelled = "Cancelled";
 
     }
 }

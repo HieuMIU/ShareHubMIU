@@ -22,28 +22,46 @@ namespace ShareHubMIU.Application.Services.Implementations
         {
             ArgumentNullException.ThrowIfNull(commonItem);
 
+            //set default value
+            commonItem.DateListed = DateTime.Now;
+
             _unitOfWork.CommonItem.Add(commonItem);
             _unitOfWork.Save();
         }
 
         public bool DeleteCommonItem(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                CommonItem? objFromDb = _unitOfWork.CommonItem.Get(u => u.Id == id);
+                if (objFromDb is not null)
+                {
+                    _unitOfWork.CommonItem.Remove(objFromDb);
+                    _unitOfWork.Save();
+                    return true;
+                }
+                return false;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
 
         public IEnumerable<CommonItem> GetAllCommonItems()
         {
-            throw new NotImplementedException();
+            return _unitOfWork.CommonItem.GetAll();
         }
 
         public CommonItem GetItemById(int id)
         {
-            throw new NotImplementedException();
+            return _unitOfWork.CommonItem.Get(u => u.Id == id);
         }
 
         public void UpdateCommonItem(CommonItem CommonItem)
         {
-            throw new NotImplementedException();
+            _unitOfWork.CommonItem.Update(CommonItem);
+            _unitOfWork.Save();
         }
     }
 }

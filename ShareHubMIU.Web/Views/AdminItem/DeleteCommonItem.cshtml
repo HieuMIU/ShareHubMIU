@@ -11,18 +11,20 @@
     <div class="card-body border p-4">
         <form method="post" class="row" enctype="multipart/form-data">
             <input asp-for="CommonItem.SellerId" hidden />
+            <input asp-for="CommonItem.Id" hidden />
+            <input asp-for="CommonItem.Status" hidden />
             <div class="p-3">
 
                 <!-- General Info Section -->
                 <h5 class="mb-3">General Info</h5>
                 <hr>
                 <div class="form-floating py-1 col-12">
-                    <input asp-for="CommonItem.Title" class="form-control border shadow" />
+                    <input asp-for="CommonItem.Title" disabled class="form-control border shadow" />
                     <label asp-for="CommonItem.Title" class="ms-2"></label>
                     <span asp-validation-for="CommonItem.Title" class="text-danger"></span>
                 </div>
                 <div class="form-floating py-1 col-12">
-                    <input asp-for="CommonItem.Description" class="form-control border shadow" />
+                    <input asp-for="CommonItem.Description" disabled class="form-control border shadow" />
                     <label asp-for="CommonItem.Description" class="ms-2"></label>
                     <span asp-validation-for="CommonItem.Description" class="text-danger"></span>
                 </div>
@@ -30,14 +32,14 @@
                 <!-- SubCategory and Name -->
                 <div class="form-floating py-1 col-12">
                     <select asp-for="@Model.CommonItem.Type" asp-items="@Model.Categories"
-                            class="form-select border shadow">
+                            disabled class="form-select border shadow">
                         <option disabled selected>--Select Category--</option>
                     </select>
                     <label asp-for="CommonItem.Type" class="ms-2"></label>
                     <span asp-validation-for="CommonItem.Type" class="text-danger"></span>
                 </div>
                 <div class="form-floating py-1 col-12">
-                    <input asp-for="CommonItem.Name" class="form-control border shadow" />
+                    <input asp-for="CommonItem.Name" disabled class="form-control border shadow" />
                     <label asp-for="CommonItem.Name" class="ms-2"></label>
                     <span asp-validation-for="CommonItem.Name" class="text-danger"></span>
                 </div>              
@@ -46,21 +48,21 @@
                 <h5 class="mb-3">Details</h5>
                 <div class="form-floating py-1 col-12">
                     <select asp-for="@Model.CommonItem.Condition" asp-items="@Model.Conditions"
-                            class="form-select border shadow">
+                            disabled class="form-select border shadow">
                         <option disabled selected>--Select Condition--</option>
                     </select>
                     <label asp-for="CommonItem.Condition" class="ms-2"></label>
                     <span asp-validation-for="CommonItem.Condition" class="text-danger"></span>
                 </div>
                 <div class="form-floating py-1 col-12">
-                    <input asp-for="CommonItem.Price" class="form-control border shadow" />
+                    <input asp-for="CommonItem.Price" disabled class="form-control border shadow" />
                     <label asp-for="CommonItem.Price" class="ms-2"></label>
                     <span asp-validation-for="CommonItem.Price" class="text-danger"></span>
                 </div>
 
                 <!-- Image Upload -->
                 <div class="form-floating py-1 col-12">
-                    <input asp-for="CommonItem.Image" class="form-control border shadow" type="file" />
+                    <input asp-for="CommonItem.Image" disabled class="form-control border shadow" type="file" />
                     <label asp-for="CommonItem.Image" class="ms-2"></label>
                     <span asp-validation-for="CommonItem.Image" class="text-danger"></span>
                 </div>
@@ -69,31 +71,31 @@
                 <hr>
                 <h5 class="mb-3">Address</h5>
                 <div class="form-floating py-1 col-12">
-                    <input asp-for="CommonItem.AddressLine1" class="form-control border shadow" />
+                    <input asp-for="CommonItem.AddressLine1" disabled class="form-control border shadow" />
                     <label asp-for="CommonItem.AddressLine1" class="ms-2"></label>
                     <span asp-validation-for="CommonItem.AddressLine1" class="text-danger"></span>
                 </div>
 
                 <div class="form-floating py-1 col-12">
-                    <input asp-for="CommonItem.AddressLine2" class="form-control border shadow" />
+                    <input asp-for="CommonItem.AddressLine2" disabled class="form-control border shadow" />
                     <label asp-for="CommonItem.AddressLine2" class="ms-2"></label>
                     <span asp-validation-for="CommonItem.AddressLine2" class="text-danger"></span>
                 </div>
 
                 <div class="form-floating py-1 col-12">
-                    <input asp-for="CommonItem.City" class="form-control border shadow" />
+                    <input asp-for="CommonItem.City" disabled class="form-control border shadow" />
                     <label asp-for="CommonItem.City" class="ms-2"></label>
                     <span asp-validation-for="CommonItem.City" class="text-danger"></span>
                 </div>
 
                 <div class="form-floating py-1 col-12">
-                    <input asp-for="CommonItem.State" class="form-control border shadow" />
+                    <input asp-for="CommonItem.State" disabled class="form-control border shadow" />
                     <label asp-for="CommonItem.State" class="ms-2"></label>
                     <span asp-validation-for="CommonItem.State" class="text-danger"></span>
                 </div>
 
                 <div class="form-floating py-1 col-12">
-                    <input asp-for="CommonItem.ZipCode" class="form-control border shadow" />
+                    <input asp-for="CommonItem.ZipCode" disabled class="form-control border shadow" />
                     <label asp-for="CommonItem.ZipCode" class="ms-2"></label>
                     <span asp-validation-for="CommonItem.ZipCode" class="text-danger"></span>
                 </div>
@@ -101,11 +103,11 @@
                 <div class="row pt-2">
                     <div class="col-6 col-md-3">
                         <button type="submit" class="btn btn-success w-100">
-                            <i class="bi bi-check-circle"></i> Create
+                            <i class="bi bi-check-circle"></i> Delete
                         </button>
                     </div>
                     <div class="col-6 col-md-3">
-                        <a asp-controller="Item" asp-action="Index" class="btn btn-secondary w-100">
+                        <a asp-controller="AdminItem" asp-action="Index" class="btn btn-secondary w-100">
                             <i class="bi bi-x-circle"></i> Cancel
                         </a>
                     </div>

@@ -14,87 +14,78 @@ namespace ShareHubMIU.Infrastructure.Repository
     public class Repository<T> : IRepository<T> where T : class
     {
         private readonly ApplicationDbContext _db;
-
         internal DbSet<T> dbSet;
-
         public Repository(ApplicationDbContext db)
         {
             _db = db;
             dbSet = _db.Set<T>();
         }
-
         public void Add(T entity)
         {
             dbSet.Add(entity);
         }
 
-        public void Delete(T entity)
+        public bool Any(Expression<Func<T, bool>> filter)
         {
-            dbSet.Remove(entity);
+            return dbSet.Any(filter);
         }
 
-        public T Get(Expression<Func<T, bool>> filter, string? includeProperties = null, bool isTracked = false)
+        public T Get(Expression<Func<T, bool>> filter, string? includeProperties = null, bool tracked = false)
         {
             IQueryable<T> query;
-
-            if(isTracked)
-            {
-                query = dbSet.AsNoTracking();
-            }
-            else
+            if (tracked)
             {
                 query = dbSet;
             }
-
-
-            if (filter is not null)
+            else
+            {
+                query = dbSet.AsNoTracking();
+            }
+            if (filter != null)
             {
                 query = query.Where(filter);
             }
-            if (includeProperties is not null)
+            if (!string.IsNullOrEmpty(includeProperties))
             {
-                //Case sensitive
+                //Villa,VillaNumber -- case sensitive
                 foreach (var includeProp in includeProperties
                     .Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
                 {
-                    query = query.Include(includeProp);
+                    query = query.Include(includeProp.Trim());
                 }
             }
             return query.FirstOrDefault();
         }
 
-        public IEnumerable<T> GetAll(Expression<Func<T, bool>>? filter = null, string? includeProperties = null, bool isTracked = false)
+        public IEnumerable<T> GetAll(Expression<Func<T, bool>>? filter = null, string? includeProperties = null, bool tracked = false)
         {
             IQueryable<T> query;
-
-            if (isTracked)
-            {
-                query = dbSet.AsNoTracking();
-            }
-            else
+            if (tracked)
             {
                 query = dbSet;
             }
-
-            if (filter is not null)
+            else
+            {
+                query = dbSet.AsNoTracking();
+            }
+            if (filter != null)
             {
                 query = query.Where(filter);
             }
-            if (includeProperties is not null)
+            if (!string.IsNullOrEmpty(includeProperties))
             {
-                //Case sensitive
                 foreach (var includeProp in includeProperties
                     .Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
                 {
-                    query = query.Include(includeProp);
+                    query = query.Include(includeProp.Trim());
                 }
             }
             return query.ToList();
         }
 
-        public bool Any(Expression<Func<T, bool>> filter)
+        public void Remove(T entity)
         {
-            return dbSet.Any(filter);
+            dbSet.Remove(entity);
         }
     }
 }

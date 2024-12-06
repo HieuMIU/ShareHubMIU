@@ -12,7 +12,11 @@ namespace ShareHubMIU.Domain.Entities
     {
         public int Id { get; set; }
 
+        [Required]
         public int ItemId { get; set; }
+
+        [ForeignKey("ItemId")]
+        public Item Item { get; set; }
 
         public string Type { get; set; }
 

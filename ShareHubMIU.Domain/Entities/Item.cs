@@ -21,7 +21,7 @@ namespace ShareHubMIU.Domain.Entities
         [Required]
         public string Type { get; set; }
         public DateTime DateListed { get; set; }
-        public bool IsAvailable { get; set; }
+        public string Status { get; set; }
 
         public string AddressLine1 { get; set; }
 
@@ -29,6 +29,9 @@ namespace ShareHubMIU.Domain.Entities
         public string City { get; set; }
         public string State { get; set; }
         public string ZipCode { get; set; }
+
+
+        public double Price { get; set; }
 
         [Required]
         public required string SellerId { get; set; }

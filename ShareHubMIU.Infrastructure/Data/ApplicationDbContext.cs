@@ -27,11 +27,7 @@ namespace ShareHubMIU.Infrastructure.Data
 
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
 
-        public DbSet<ItemReview> ItemReviews { get; set; }
-
         public DbSet<Request> Requests { get; set; }
-
-        public DbSet<Order> Orders { get; set; }
 
         public DbSet<UserReview> UserReviews { get; set; }
 

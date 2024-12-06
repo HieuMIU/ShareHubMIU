@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ShareHubMIU.Infrastructure.Data;
 
@@ -11,9 +12,11 @@ using ShareHubMIU.Infrastructure.Data;
 namespace ShareHubMIU.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241206051243_remove-isavaible-from-item-table")]
+    partial class removeisavaiblefromitemtable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -277,9 +280,6 @@ namespace ShareHubMIU.Infrastructure.Migrations
                     b.Property<string>("ImageUrl")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<double>("Price")
-                        .HasColumnType("float");
-
                     b.Property<string>("SellerId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
@@ -315,6 +315,64 @@ namespace ShareHubMIU.Infrastructure.Migrations
                     b.UseTphMappingStrategy();
                 });
 
+            modelBuilder.Entity("ShareHubMIU.Domain.Entities.ItemReview", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("ItemId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Note")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Rating")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ItemReviews");
+                });
+
+            modelBuilder.Entity("ShareHubMIU.Domain.Entities.Order", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("ExpiredDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsPaid")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("RequestId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RequestId");
+
+                    b.ToTable("Orders");
+                });
+
             modelBuilder.Entity("ShareHubMIU.Domain.Entities.Request", b =>
                 {
                     b.Property<int>("Id")
@@ -347,8 +405,6 @@ namespace ShareHubMIU.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("BuyerId");
-
-                    b.HasIndex("ItemId");
 
                     b.ToTable("Requests");
                 });
@@ -432,6 +488,9 @@ namespace ShareHubMIU.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("IsAvailable")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Make")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -445,6 +504,9 @@ namespace ShareHubMIU.Infrastructure.Migrations
 
                     b.Property<int>("NumberOfSeats")
                         .HasColumnType("int");
+
+                    b.Property<double>("PricePerDay")
+                        .HasColumnType("float");
 
                     b.Property<string>("Transmission")
                         .IsRequired()
@@ -474,6 +536,9 @@ namespace ShareHubMIU.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<double>("Price")
+                        .HasColumnType("float");
+
                     b.HasDiscriminator().HasValue("CommonItem");
                 });
 
@@ -492,6 +557,9 @@ namespace ShareHubMIU.Infrastructure.Migrations
 
                     b.Property<bool>("IsFurnished")
                         .HasColumnType("bit");
+
+                    b.Property<double>("RentPerMonth")
+                        .HasColumnType("float");
 
                     b.Property<string>("RoomType")
                         .IsRequired()
@@ -571,6 +639,17 @@ namespace ShareHubMIU.Infrastructure.Migrations
                     b.Navigation("Seller");
                 });
 
+            modelBuilder.Entity("ShareHubMIU.Domain.Entities.Order", b =>
+                {
+                    b.HasOne("ShareHubMIU.Domain.Entities.Request", "Request")
+                        .WithMany()
+                        .HasForeignKey("RequestId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Request");
+                });
+
             modelBuilder.Entity("ShareHubMIU.Domain.Entities.Request", b =>
                 {
                     b.HasOne("ShareHubMIU.Domain.Entities.ApplicationUser", "Buyer")
@@ -579,15 +658,7 @@ namespace ShareHubMIU.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ShareHubMIU.Domain.Entities.Item", "Item")
-                        .WithMany()
-                        .HasForeignKey("ItemId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("Buyer");
-
-                    b.Navigation("Item");
                 });
 
             modelBuilder.Entity("ShareHubMIU.Domain.Entities.UserReport", b =>

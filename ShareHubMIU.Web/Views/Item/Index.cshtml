@@ -1,0 +1,146 @@
+﻿@model IEnumerable<ShareHubMIU.Domain.Entities.Item>
+
+<div class="w-100 card border-0 p-4">
+    <div class="card-header bg-success bg-gradient ml-0 py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-white py-2">Your Selling List</h2>
+            </div>
+        </div>
+    </div>
+    <div class="card-body border p-4">
+        <div class="row pb-3">
+            <div class="col-6 offset-6 text-end">
+                <div class="btn-group">
+                    <!-- Main Button (Create New Item) -->
+                    <button type="button" class="btn btn-secondary">
+                        <i class="bi bi-plus-circle"></i> Create New Item
+                    </button>
+                    <!-- Dropdown -->
+                    <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                        <span class="visually-hidden">Toggle Dropdown</span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <!-- Dropdown items (sub-buttons) -->
+                        <li><a class="dropdown-item" asp-controller="Item" asp-action="CreateCarSharing">Add Car Sharing</a></li>
+                        <li><a class="dropdown-item" asp-controller="Item" asp-action="CreateRoomSharing">Add Room Sharing</a></li>
+                        <li><a class="dropdown-item" asp-controller="Item" asp-action="CreateCommonItem">Add Item</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Date Listed</th>
+                    <th>Status?</th>
+                    <th>Address</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var obj in Model)
+                {
+                    <tr>
+                        <td>@obj.Title</td>
+                        <td>@obj.Description</td>
+                        <td>@obj.DateListed</td>
+                        <td class="text-center align-middle">
+                            @if (obj.Status == "Available")
+                            {
+                                <a
+                                   class="btn btn-success mx-2">
+                                    Available
+                                </a>
+                            }
+                            else if (obj.Status == "Reserved")
+                            {
+                                <a class="btn btn-primary mx-2">
+                                    Reserved
+                                </a>
+                            }
+                            else if (obj.Status == "Sold")
+                            {
+                                <a class="btn btn-info mx-2">
+                                    Sold
+                                </a>
+                            }
+                            else if (obj.Status == "Cancelled")
+                            {
+                                <a class="btn btn-danger mx-2">
+                                    Cancelled
+                                </a>
+                            }
+                        </td>
+
+                        <td>@String.Format("{0}, {1}, {2}, {3}, {4}", obj.AddressLine1, obj.AddressLine2, obj.City, obj.State, obj.ZipCode)</td>
+                        <td>
+                            <div class="w-75 btn-group" role="group">
+                                @if(obj.Type == SD.CategoryTypeCarSharing.ToString())
+                                {
+                                    <a asp-controller="Item" asp-action="ViewCarSharing" asp-route-itemId="@obj.Id"
+                                       class="btn btn-info mx-2">
+                                        <i class="bi bi-eye"></i> View
+                                    </a>
+                                    @if(obj.Status == SD.ItemStatusAvailable.ToString())
+                                    {
+                                        <a asp-controller="Item" asp-action="UpdateCarSharing" asp-route-itemId="@obj.Id"
+                                           class="btn btn-success mx-2">
+                                            <i class="bi bi-pencil-square"></i> Edit
+                                        </a>
+                                        <a asp-controller="Item" asp-action="DeleteCarSharing" asp-route-itemId="@obj.Id"
+                                           class="btn btn-danger mx-2">
+                                            <i class="bi bi-trash-fill"></i> Delete
+                                        </a>
+                                    }
+                                    
+                                }
+                                else if (obj.Type == SD.CategoryTypeRoomSharing.ToString())
+                                {
+                                    <a asp-controller="Item" asp-action="ViewRoomSharing" asp-route-itemId="@obj.Id"
+                                       class="btn btn-info mx-2">
+                                        <i class="bi bi-eye"></i> View
+                                    </a>
+                                    @if (obj.Status == SD.ItemStatusAvailable.ToString())
+                                    {
+                                        <a asp-controller="Item" asp-action="UpdateRoomSharing" asp-route-itemId="@obj.Id"
+                                           class="btn btn-success mx-2">
+                                            <i class="bi bi-pencil-square"></i> Edit
+                                        </a>
+                                        <a asp-controller="Item" asp-action="DeleteRoomSharing" asp-route-itemId="@obj.Id"
+                                           class="btn btn-danger mx-2">
+                                            <i class="bi bi-trash-fill"></i> Delete
+                                        </a>
+                                    }
+                                    
+                                }
+                                else
+                                {
+                                    <a asp-controller="Item" asp-action="ViewCommonItem" asp-route-itemId="@obj.Id"
+                                       class="btn btn-info mx-2">
+                                        <i class="bi bi-eye"></i> View
+                                    </a>
+                                    @if (obj.Status == SD.ItemStatusAvailable.ToString())
+                                    {
+                                        <a asp-controller="Item" asp-action="UpdateCommonItem" asp-route-itemId="@obj.Id"
+                                           class="btn btn-success mx-2">
+                                            <i class="bi bi-pencil-square"></i> Edit
+                                        </a>
+                                        <a asp-controller="Item" asp-action="DeleteCommonItem" asp-route-itemId="@obj.Id"
+                                           class="btn btn-danger mx-2">
+                                            <i class="bi bi-trash-fill"></i> Delete
+                                        </a>
+                                    }
+                                    
+                                }                                
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

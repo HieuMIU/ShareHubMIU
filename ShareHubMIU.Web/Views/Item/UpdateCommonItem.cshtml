@@ -11,6 +11,8 @@
     <div class="card-body border p-4">
         <form method="post" class="row" enctype="multipart/form-data">
             <input asp-for="CommonItem.SellerId" hidden />
+            <input asp-for="CommonItem.Id" hidden />
+            <input asp-for="CommonItem.Status" hidden />
             <div class="p-3">
 
                 <!-- General Info Section -->
@@ -101,7 +103,7 @@
                 <div class="row pt-2">
                     <div class="col-6 col-md-3">
                         <button type="submit" class="btn btn-success w-100">
-                            <i class="bi bi-check-circle"></i> Create
+                            <i class="bi bi-check-circle"></i> Update
                         </button>
                     </div>
                     <div class="col-6 col-md-3">

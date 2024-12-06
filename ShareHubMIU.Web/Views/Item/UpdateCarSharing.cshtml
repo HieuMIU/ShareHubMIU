@@ -11,7 +11,9 @@
     <div class="card-body border p-4">
         <form method="post" class="row" enctype="multipart/form-data">
             <input asp-for="CarSharing.SellerId" hidden />
+            <input asp-for="CarSharing.Id" hidden />
             <input asp-for="CarSharing.Type" hidden />
+            <input asp-for="CarSharing.Status" hidden />
             <div class="p-3">
                 @* <div asp-validation-summary="All"></div>  *@
                 <!-- General Info Section -->
@@ -159,7 +161,7 @@
                 <div class="row pt-2">
                     <div class="col-6 col-md-3">
                         <button type="submit" class="btn btn-success w-100">
-                            <i class="bi bi-check-circle"></i> Create
+                            <i class="bi bi-check-circle"></i> Update
                         </button>
                     </div>
                     <div class="col-6 col-md-3">
