@@ -3,9 +3,13 @@
 ## Description
 
 - Problem:
+
   ![alt text](https://github.com/HieuMIU/ShareHubMIU/blob/main/Documents/ProblemStatement.jpg)
+  
 - Solution Idea:
+
   ![alt text](https://github.com/HieuMIU/ShareHubMIU/blob/main/Documents/ProblemStatement2.jpg)
+  
 ShareHub MIU is a dedicated platform for students and staff at Maharishi International University to easily share, exchange, and rent items within the MIU community. From rooms and cars to furniture and electronics, ShareHub MIU fosters a sustainable and convenient way to connect and support one another. Users can list items for free or for a fee, making it simple to find what they need or pass along what they no longer use.
 
 The platform offers unique features for four user roles—Admin, Provider, and User—each with specific permissions and functionalities to ensure a smooth and secure experience.
@@ -44,29 +48,44 @@ Throughout each transaction and interaction, the system sends automated email no
 ![alt text](https://github.com/HieuMIU/ShareHubMIU/blob/main/Documents/Project-ER-Diagram.jpg)
 
 ## Installation instructions
+
 - Prerequisite:
+  
   +Visual Studio 2022 or later.
+  
   +Docker
+  
   +Azure Account
+  
 - Clone this repository:
   ```
     git clone https://github.com/HieuMIU/ShareHubMIU.git
   ```
 - Create a Azure SQL Server instance: https://learn.microsoft.com/en-us/azure/azure-sql/database/single-database-create-quickstart?view=azuresql&tabs=azure-portal
+  
 - Open Project by Visual Studio, then open file appsettings.json in ShareHubMIU.Web project and replace ConnectionStrings.DefaultConnection with connection string of your SQL Server
+  
 - In Visual Studio, Choose Tool/Nuget Package Manager/Package Manager Console, then the Package Manager Console appears:
+  
   + Choose Default project is ShareHubMIU.Infrastructure, and run this commmand:
     ```
       update-database
     ```
     This project is Code-First, then it will build all migrations to the database
+    
 - Pack Release build by Docker: In Visual Studio, left-click on ShareHubMIU.Web and choose Add/Docker support..., and we  have default Dockerfile
     +Result:
+  
   ![alt text](https://github.com/HieuMIU/ShareHubMIU/blob/main/Documents/create-dockerfile.jpg)
+  
   ![alt text](https://github.com/HieuMIU/ShareHubMIU/blob/main/Documents/dockerfile.jpg)
+  
 - Run Container(Dockerfile) to create Docker Image and Docker Container
-- ![alt text](https://github.com/HieuMIU/ShareHubMIU/blob/main/Documents/build-and-create-image-container.jpg)
+  
+  ![alt text](https://github.com/HieuMIU/ShareHubMIU/blob/main/Documents/build-and-create-image-container.jpg)
+  
 - Go to https://hub.docker.com/ and create new repository for new Image
+  
 - Push your Image to DockerHub:
     + Open CMD and run below commands:
     + Check your local Image:
@@ -82,12 +101,19 @@ Throughout each transaction and interaction, the system sends automated email no
         docker push {DOCKER_USERNAME}/{NEW_IMAGE}
       ```
 - Publish to Azure: In Visual Studio, left-click on ShareHubMIU.Web and choose Publish
+  
   ![alt text](https://github.com/HieuMIU/ShareHubMIU/blob/main/Documents/open-publish-popup.jpg)
+  
   + Follow instructions to add Specific target, Container App and Registry
+    
   ![alt text](https://github.com/HieuMIU/ShareHubMIU/blob/main/Documents/open-publish-popup_2.jpg)
+
   + Choose Container build is Docker Desktop
+    
   ![alt text](https://github.com/HieuMIU/ShareHubMIU/blob/main/Documents/open-publish-popup_3.jpg)
+  
   + Choose Deployment type in your need
+    
   + Wait a few minutes after configuration completed, press Publish to completely Publish into Azure Container App
  
 - Enjoy!
